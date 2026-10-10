@@ -1,0 +1,3 @@
+source "$APPSDIR/projects/wificonnect/Kconfig"
+source "$APPSDIR/projects/webdata/Kconfig"
+# source "$APPSDIR/projects/nothing/Kconfig"

@@ -1,0 +1,44 @@
+services:
+  sensor-01:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DEVICE_NAME=sensor-003
+      - API_KEY=none
+      - SECRET=none
+      - MQTT_BROKER=mqtt-broker
+
+
+  sensor-02:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DEVICE_NAME=sensor-004
+      - API_KEY=none
+      - SECRET=none
+      - MQTT_BROKER=mqtt-broker
+
+
+  sensor-03:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DEVICE_NAME=sensor-005
+      - API_KEY=none
+      - SECRET=none
+      - MQTT_BROKER=mqtt-broker
+
+
+  sensor-04:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DEVICE_NAME=sensor-006
+      - API_KEY=none
+      - SECRET=none
+      - MQTT_BROKER=mqtt-broker
+

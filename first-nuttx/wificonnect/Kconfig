@@ -1,0 +1,5 @@
+config WIFICONNECT_APP
+    tristate "Wi-Fi Connection App"
+    default y
+    ---help---
+        Enable the Wi-Fi connection initializer application.

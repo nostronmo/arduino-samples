@@ -1,0 +1,45 @@
+[tools]
+"http:xtensa-esp-elf" = { version = "14.2.0", url = "https://github.com/espressif/crosstool-NG/releases/download/esp-14.2.0_20241119/xtensa-esp-elf-14.2.0_20241119-x86_64-linux-gnu.tar.xz" }
+
+[env]
+ESPTOOL_PORT="/dev/ttyUSB0"
+
+[tasks.build]
+description = "Enable app and compile NuttX"
+dir = "nuttx"
+usage = '''
+arg "[project_name]" default="CONFIG_EXAMPLES_HELLO_CUSTOM" help="The name of the project"
+'''
+run = [
+    "kconfig-tweak --file .config --enable {{usage.project_name}}",
+    "make -j$(nproc)"
+]
+
+[tasks.flash]
+description = "Build and flash NuttX to target device"
+dir = "nuttx"
+depends = ["build"]
+run = "make flash"
+
+[tasks.flash_fast]
+alias = "fast"
+description = "Flash NuttX to target device"
+dir = "nuttx"
+run = "make flash"
+
+[tasks.monitor]
+alias = "monitor"
+description = "Launch GUI serial monitor"
+dir = "nuttx"
+run = "gtkterm -p $ESPTOOL_PORT -s 115200"
+
+[tasks.build_nuttx]
+alias = "nuttx"
+description = "Build Nuttx Project"
+#esp32-devkitc
+usage = '''
+arg "[tooling]" default="sim" help="Tool for compilation"
+arg "[project]" default="nsh" help="NuttX Configuration"
+'''
+dir = "nuttx"
+run = "./tools/configure.sh -E -l {{usage.tooling}}:{{usage.project}}"

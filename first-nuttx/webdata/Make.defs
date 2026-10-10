@@ -1,0 +1,3 @@
+ifneq ($(CONFIG_WIFICONNECT_APP),)
+CONFIGURED_APPS += $(APPDIR)/projects/wificonnect
+endif

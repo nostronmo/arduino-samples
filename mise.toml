@@ -1,0 +1,11 @@
+[tasks.project-eclipse]
+alias = "new"
+description = "Create a new PlatformIO project for Eclipse"
+usage = '''
+arg "[project_name]" default="default_name" help="The name of your project folder"
+arg "[board_id]" default="uno" help="The PlatformIO board ID (e.g., uno, esp32dev)"
+'''
+run = [
+    "mkdir -p {{usage.project_name}}",
+    "pio project init --ide eclipse -d {{usage.project_name}} --board {{usage.board_id}}"
+]

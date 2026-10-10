@@ -1,0 +1,32 @@
+[env]
+ARDUINO_PORT = "/dev/tnt3"
+UNO_BOARD = "arduino:avr:uno"
+ESP_BOARD = "esp32:esp32:esp32"
+
+[tasks.compile]
+description = "Compile and upload Uno (Dynamic)"
+run = "arduino-cli compile --fqbn $UNO_BOARD . && arduino-cli upload -p $ARDUINO_PORT --fqbn $UNO_BOARD ."
+
+[tasks."compile:esp32"]
+description = "Compile and upload ESP32 (Dynamic)"
+run = "arduino-cli compile --fqbn $ESP_BOARD . && arduino-cli upload -p $ARDUINO_PORT --fqbn $ESP_BOARD ."
+
+[tasks."test:esp32"]
+description = "Test ESP32 compilation (DYNAMIC)"
+run = "arduino-cli compile --fqbn esp32:esp32:esp32 ."
+
+[tasks.monitor]
+description = "Open serial monitor via picocom"
+run = "picocom -b 9600 /dev/tnt3"
+
+[tasks.clean]
+description = "Remove build artifacts"
+run = "rm -rf build/"
+
+[tasks.deps]
+description = "Install necessary cores and libraries"
+run = """
+arduino-cli core install arduino:avr
+arduino-cli core install esp32:esp32
+arduino-cli lib install "LiquidCrystal I2C"
+"""
